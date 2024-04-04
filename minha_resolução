@@ -1,0 +1,60 @@
+print("""        
+                 BEM VINDO!!!
+      
+                 _ _.-'`-._ _                 
+                ;.'________'.;                
+     _________n.[____________].n_________     
+    |``_``_``_``||==||==||==||``_``_``_``]    
+    |```````````||  ||  ||  ||```````````|    
+    |LI LI LI LI||LI||LI||LI||LI LI LI LI|    
+    |.. .. .. ..||..||..||..||.. .. .. ..|    
+    |LI LI LI LI||LI||LI||LI||LI LI LI LI|    
+ ,,;;,;;;,;;;,;;;,;;;,;;;,;;;,;;,;;;,;;;,;;,, 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                                             """)
+
+#variaveis usadas
+extrato = ""
+conta = 0
+limite = 500
+numero_saques = 0
+LIMITE_SAQUES = 3
+
+while True:
+    
+    opcao = int(input("""Escolha uma das opções a seguir para dar continuidade:
+      (0) Sacar
+      (1) Depositar
+      (2) Extrato
+      (3) Sair\n\n"""))
+
+    if opcao == 0:
+        if numero_saques < LIMITE_SAQUES:
+            saque = float(input("Quanto deseja sacar?\n"))
+            if 0 < saque <= min(limite, conta):
+                numero_saques += 1
+                conta -= saque
+                extrato += f"Saque: R$ {saque:.2f}\n"
+            else: 
+                print("Valor inválido ou insuficiente em conta!")
+        else:
+            print("Limite de saques atingido")
+
+    elif opcao == 1:
+        deposito = float(input("Quanto deseja depositar?\n"))
+        if deposito > 0:
+            conta += deposito
+            extrato += f"Depósito: R$ {deposito:.2f}\n"
+        else:
+            print("\nValor inválido\n")
+    
+    elif opcao == 2:
+        print("=================== EXTRATO =====================")
+        print("Não foram realizadas movimentações." if not extrato else extrato)
+        print(f"\nO valor total na conta é: R$ {conta:.2f}\n")
+        print("==================================================")    
+    elif opcao == 3:
+        print("\n Obrigado pela preferência! \n")
+        break
+    else:
+        print("\n***Operação Inválida****\n")
